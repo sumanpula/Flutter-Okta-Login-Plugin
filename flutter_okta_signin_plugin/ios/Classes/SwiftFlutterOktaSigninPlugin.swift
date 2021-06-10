@@ -9,10 +9,7 @@ public class SwiftFlutterOktaSigninPlugin: NSObject, FlutterPlugin {
   }
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-    if ([@"signIn" isEqualToString:call.method]) {
-        result(FlutterMethodNotImplemented);
-      } else {
-        result(FlutterMethodNotImplemented);
-      }
+  // implement all okta methods here and then call based on request
+    result(FlutterMethodNotImplemented);
   }
 }

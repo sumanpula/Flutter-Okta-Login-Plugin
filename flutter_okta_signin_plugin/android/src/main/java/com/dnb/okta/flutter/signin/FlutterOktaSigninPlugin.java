@@ -94,6 +94,7 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
             this.result = result;
         } else {
             result.notImplemented();
+            showMessage("Method not implemented");
         }
     }
 
@@ -162,7 +163,7 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
 
                         @Override
                         public void onError(@Nullable String msg, AuthorizationException error) {
-                            showMessage("onError "+ error.errorDescription);
+                            showMessage("onError "+ error.errorDescription + "Check Logs");
                             oktaProgressDialog.hide();
                             result.error(error.error, error.errorDescription, "Could not login");
                         }
@@ -318,7 +319,7 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
 
     void showMessage(String message) {
         Log.e("Login Error", " error "+message);
-        Toast.makeText(this.context, ""+message +" If any error then see Logs", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.context, ""+message, Toast.LENGTH_SHORT).show();
     }
 
 
