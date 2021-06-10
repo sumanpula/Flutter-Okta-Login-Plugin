@@ -36,7 +36,7 @@ android {
         versionName flutterVersionName
 
         android.defaultConfig.manifestPlaceholders = [
-                "appAuthRedirectScheme": "com.dnb.fni.okta.login"
+                "appAuthRedirectScheme": "com.dnb.okta.flutter.signin"
         ]
     }
 

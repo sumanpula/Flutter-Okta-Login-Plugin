@@ -3,6 +3,7 @@ package com.dnb.okta.flutter.signin;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -41,7 +42,7 @@ import io.flutter.plugin.common.PluginRegistry;
  * FlutterOktaSigninPlugin
  */
 public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler, ConfigKeys,
-        Methods, ActivityAware {
+        Methods, ActivityAware, PluginRegistry.ActivityResultListener {
     /// The MethodChannel that will the communication between Flutter and native Android
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
@@ -317,7 +318,7 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
 
     void showMessage(String message) {
         Log.e("Login Error", " error "+message);
-        Toast.makeText(this.context, ""+message +" Check in logs", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.context, ""+message +" If any error then see Logs", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -328,8 +329,8 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
 
     @Override
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
+        binding.addActivityResultListener(this);
        this.context = binding.getActivity();
-        showLoading();
     }
 
     private void showLoading() {
@@ -339,16 +340,26 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
 
     @Override
     public void onDetachedFromActivityForConfigChanges() {
-
+        this.context = null;
+        oktaProgressDialog = null;
     }
 
     @Override
     public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
-
+        binding.addActivityResultListener(this);
+        this.context = binding.getActivity();
     }
 
     @Override
     public void onDetachedFromActivity() {
+        this.context = null;
+        oktaProgressDialog = null;
+    }
 
+    @Override
+    public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
+        //must pass the results back to the WebAuthClient.
+        mWebAuth.handleActivityResult(requestCode, resultCode, data);
+        return true;
     }
 }
