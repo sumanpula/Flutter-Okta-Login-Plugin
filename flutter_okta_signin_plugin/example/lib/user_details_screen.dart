@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_okta_signin_plugin/model/response.dart';
+import 'package:flutter_okta_signin_plugin/model/user_profile.dart';
+import 'package:flutter_okta_signin_plugin/okta_manager.dart';
+
 import 'login_screen.dart';
-import 'model/response.dart';
-import 'model/user_profile.dart';
-import 'okta_manager.dart';
 
 class UserDetailsScreen extends StatefulWidget {
   final Response response;
@@ -15,13 +16,11 @@ class UserDetailsScreen extends StatefulWidget {
 
 class _UserDetailsScreenState extends State<UserDetailsScreen> {
   static final String _TAG = "UserDetailsScreen:: ";
-
+  final OktaManager oktaManager = OktaManager();
   bool showProfile = false;
   UserProfile userProfile;
   @override
   Widget build(BuildContext context) {
-
-   // print("$_TAG response ${widget.response.access_token}");
     return Scaffold(
       appBar: AppBar(
         title: Text("User Details"),
@@ -88,7 +87,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
 
   _signOut() {
     return _logout().then((value) => {
-      print("$_TAG response $value"),
+      // print("$_TAG response $value"),
       Navigator.push(context, MaterialPageRoute(
           builder: (BuildContext c) {
             return LoginScreen();
@@ -133,13 +132,13 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
   }
 
   Future _logout() async {
-    final result = await OktaManager().signOut();
-    print("$_TAG _logout response $result");
+    final result = await oktaManager.signOut();
+    // print("$_TAG _logout response $result");
     return result;
   }
 
   Future _getUserProfile() async {
-    final result = await OktaManager().getUserProfile();
+    final result = await oktaManager.getUserProfile();
     // print(" $_TAG getUserProfile response $result");
     userProfile = UserProfile.fromJson(json.decode(result));
     setState(() {

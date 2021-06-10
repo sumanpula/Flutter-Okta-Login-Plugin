@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_okta_signin_plugin/model/response.dart';
+import 'package:flutter_okta_signin_plugin/okta_manager.dart';
 
-import 'data.dart';
-import 'main.dart';
-import 'okta_manager.dart';
-import 'model/response.dart';
 import 'user_details_screen.dart';
 
 class LoginScreen extends StatelessWidget {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_okta_signin_plugin/okta_manager.dart';
 
 import 'data.dart';
-import 'login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,8 +35,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-  static bool isSignedIn = false;
-  // This widget is the home page of your application. It is stateful, meaning
+ // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
 
@@ -66,20 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return LoginScreen();
-  }
-
-  Future<bool> _isSignedIn() async {
-    final result = await OktaManager().isSignedIn();
-    // print("$TAG _isSignedIn response $result");
-    return result;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _isSignedIn().then((value) => {
-      data.value.isSignedIn = value,
-    });
+    return Container(
+      child: Center(
+        child: Text("Check Login Example : https://github.com/sumanpula/Flutter-Okta-Login-Example"),
+      ),
+    );
   }
 }
