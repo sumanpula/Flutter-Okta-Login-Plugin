@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_okta_signin_plugin/data.dart';
-import 'package:flutter_okta_signin_plugin/login_screen.dart';
 import 'package:flutter_okta_signin_plugin/okta_manager.dart';
 import 'package:flutter_okta_signin_plugin_example/config.dart';
+
+import 'login_screen.dart';
 
 
 void main() {

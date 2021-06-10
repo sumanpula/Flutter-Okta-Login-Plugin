@@ -1,8 +1,8 @@
 name: flutter_okta_signin_plugin
-description: A new Flutter plugin.
-version: 0.0.1
-author:
-homepage:
+description: A new Flutter plugin to interact with Okta.
+version: 1.0.0+1
+author: Suman Pula, (suman07.india@gmail.com)
+homepage: https://github.com/sumanpula/Flutter-Okta-Login-Plugin
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

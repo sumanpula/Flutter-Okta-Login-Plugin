@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dnb.okta.flutter.signin">
    <application
-        android:label="flutter_okta_signin_plugin_example"
+        android:label="login_example"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name="com.dnb.okta.flutter.signin.MainActivity"

@@ -49,7 +49,7 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
     private static MethodChannel channel;
     private static final String CHANNEL = "com.dnb.okta/login";
     private static WebAuthClient mWebAuth;
-    private static ProgressDialog oktaProgressDialog;
+    private static OktaProgressDialog oktaProgressDialog;
     private JSONObject configuration;
     private final static String FIRE_FOX = "org.mozilla.firefox";
     private final static String ANDROID_BROWSER = "com.android.browser";
@@ -178,7 +178,7 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
     }
 
     private void login() {
-        oktaProgressDialog.show();
+        showLoading();
         if (mWebAuth != null) {
             mWebAuth.signIn(this.context, null);
         } else {
@@ -257,7 +257,7 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
 
     private void revokeToken() {
         if (sessionClient != null) {
-            oktaProgressDialog.show();
+            showLoading();
             try {
                 sessionClient.revokeToken(sessionClient.getTokens().getAccessToken(), new RequestCallback<Boolean, AuthorizationException>() {
                     @Override
@@ -329,9 +329,12 @@ public class FlutterOktaSigninPlugin implements FlutterPlugin, MethodCallHandler
     @Override
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
        this.context = binding.getActivity();
-        oktaProgressDialog = new ProgressDialog(this.context);
-        oktaProgressDialog.setTitle("Loading...");
-        oktaProgressDialog.setMessage("Please wait!");
+        showLoading();
+    }
+
+    private void showLoading() {
+        oktaProgressDialog = new OktaProgressDialog(this.context);
+        oktaProgressDialog.show("Loading...Please wait");
     }
 
     @Override
